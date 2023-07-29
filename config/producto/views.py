@@ -1,11 +1,11 @@
 from django.contrib import messages
-<<<<<<< HEAD
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
-=======
+
 from django.contrib.auth import authenticate, login
->>>>>>> develop
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
