@@ -58,6 +58,7 @@ def eliminar_producto(request, producto_id):
     else:
         return redirect('listar_productos')
 
+#test
 
 # View para confirmar eliminación de producto
 def eliminar_producto_confirmacion(request, producto_id):
