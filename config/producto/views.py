@@ -49,27 +49,20 @@ def editar_producto(request, producto_id):
 
 
 # View para eliminar productos
-# View para eliminar productos
-def eliminar(request, producto_id):
-    # Comprobamos si la solicitud es un POST (se envió un formulario)
+def eliminar_producto(request, producto_id):
     if request.method == 'POST':
-        producto = get_object_or_404(Producto, id=producto_id) # Obtenemos el objeto Producto o mostramos error 404
-        producto.delete() # Eliminamos el producto de la base de datos
+        producto = get_object_or_404(Producto, id=producto_id)
+        producto.delete()
         messages.success(request, 'Producto eliminado exitosamente.')
-        # Redireccionamos al usuario a la vista 'listar_productos' después de eliminar el producto
         return redirect('listar_productos')
     else:
-        # Si la solicitud no es un POST, redireccionamos al usuario a la vista 'listar_productos'
         return redirect('listar_productos')
 
 
 # View para confirmar eliminación de producto
-def eliminar_confirmacion(request, producto_id):
-    producto = get_object_or_404(Producto, id=producto_id) # Obtenemos el objeto Producto correspondiente al producto_id o mostramos una página de error 404 si no se encuentra
-    # Renderizamos la plantilla 'confirmar_eliminacion.html' y pasamos el objeto 'producto' como contexto
-    # para que pueda ser utilizado en la plantilla
+def eliminar_producto_confirmacion(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
     return render(request, 'confirmar_eliminacion.html', {'producto': producto})
-
 
 
 
