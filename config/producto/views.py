@@ -49,24 +49,6 @@ def editar_producto(request, producto_id):
 
 
 # View para eliminar productos
-def eliminar_producto(request, producto_id):
-    if request.method == 'POST':
-        producto = get_object_or_404(Producto, id=producto_id)
-        producto.delete()
-        messages.success(request, 'Producto eliminado exitosamente.')
-        return redirect('listar_productos')
-    else:
-        return redirect('listar_productos')
-
-#test
-
-# View para confirmar eliminación de producto
-def eliminar_producto_confirmacion(request, producto_id):
-    producto = get_object_or_404(Producto, id=producto_id)
-    return render(request, 'confirmar_eliminacion.html', {'producto': producto})
-
-
-# View para eliminar productos
 def eliminar(request, producto_id):
     if request.method == 'POST':
         producto = get_object_or_404(Producto, id=producto_id)
