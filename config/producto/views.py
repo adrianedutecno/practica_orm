@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.db.models import Q
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Permission
@@ -55,6 +56,11 @@ def editar_producto(request, producto_id):
     return render(request, 'editar_producto.html', {'form': form, 'producto_id': producto.id})
 
 
+def buscar(request):
+    if request.method == 'GET':
+        query = request.GET.get('query')  # obteniendo lo que trae el get
+        productos = Producto.objects.filter(Q(nombre__icontains=query) | Q(fabrica__icontains=query))
+        return render(request, 'buscar.html', {'productos': productos})
 
 
 def registro(request):
@@ -94,9 +100,7 @@ def eliminar(request, producto_id):
         return redirect('listar_productos')
 
 
-
 # View para confirmar eliminación de producto
 def eliminar_confirmacion(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     return render(request, 'confirmar.html', {'producto': producto})
-

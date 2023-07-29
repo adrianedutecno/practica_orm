@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+ <section class="container mt-5">
+     <h2>Resultado Busqueda</h2>
+     {% bootstrap_messages %}
+       {% if productos %}
+       <!--tabla con libros-->
+       <table class="table table-striped mx-auto">
+       <thead>
+       <tr>
+           <th scope="col">Id</th>
+           <th scope="col">Nombre</th>
+           <th scope="col">Precio</th>
+           <th scope="col">Descripcion</th>
+           <th scope="col">Fecha Vencimiento</th>
+           <th scope="col">Fabrica</th>
+
+       </tr>
+       </thead>
+       <tbody>
+       {% for prod in productos %}
+           <tr>
+            <td> {{ prod.id }}</td>
+            <td>{{ prod.nombre }}</td>
+            <td>{{ prod.precio}}</td>
+            <td>{{ prod.descripcion }}</td>
+               <td>{{ prod.fecha_vencimiento}}</td>
+               <td>{{ prod.fabrica }}</td>
+
+        </tr>
+       {% empty %}
+          <tr>
+              <td colspan="4">
+                  No hay Productos con los datos proporcionados
+              </td>
+          </tr>
+
+       {% endfor %}
+       </tbody>
+       </table>
+       {% else %}
+       <!-- si no hay libros-->
+       <p>No hay Productos disponibles para la busqueda</p>
+       {% endif %}
+
+   </section>
+
+
+
+ </section>
+
+
+{% endblock %}
