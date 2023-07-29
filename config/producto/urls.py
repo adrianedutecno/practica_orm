@@ -1,6 +1,8 @@
+from django.contrib.auth import logout
 from django.urls import path
 
-from .views import listar_productos, crear_producto, editar_producto, eliminar, eliminar_confirmacion
+from .views import listar_productos, crear_producto, editar_producto, iniciar_sesion, eliminar, buscar, registro, \
+    cerrar_sesion, eliminar_confirmacion
 
 urlpatterns = [
     path('listar_productos/', listar_productos, name='listar_productos'),
@@ -9,4 +11,9 @@ urlpatterns = [
     # Paths para la eliminación de productos
     path('eliminar/<int:producto_id>', eliminar_confirmacion, name='eliminar_confirmacion'),
     path('confirmar/<int:producto_id>/', eliminar, name='eliminar'),
+    path('logout/', cerrar_sesion, name='logout'),
+    path('login/', iniciar_sesion, name='login'),
+    path('registrar/', registro, name='registrar'),
+    path('buscar/', buscar, name='buscar'),
+
 ]
