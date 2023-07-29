@@ -41,10 +41,10 @@ INSTALLED_APPS = [
     # 'producto'
     'bootstrap5',  # bootstrap 5
     'crispy_forms',  # crispy forms para renderizar formularios de una mejor manera
-    'crispy_bootstrap5'
+    'crispy_bootstrap5',
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [

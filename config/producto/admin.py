@@ -11,7 +11,6 @@ class FabricaAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre')
 
 
-
 # Register your models here.
 admin.site.register(Producto, ProductoAdmin)
 admin.site.register(Fabrica, FabricaAdmin)
