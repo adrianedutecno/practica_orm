@@ -49,7 +49,7 @@ def editar_producto(request, producto_id):
     return render(request, 'editar_producto.html', {'form': form, 'producto_id': producto.id})
 
 
-def buscar_producto(request):
+def buscar(request):
     if request.method=='GET':
         query = request.GET.get('query')   #obteniendo lo que trae el get
         productos = Producto.objects.filter(Q(nombre__icontains=query) | Q(fabrica__icontains=query))
