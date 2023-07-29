@@ -13,6 +13,8 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+
+venv_local/
 # AWS User-specific
 .idea/**/aws.xml
 
