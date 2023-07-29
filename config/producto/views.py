@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
@@ -48,7 +49,11 @@ def editar_producto(request, producto_id):
     return render(request, 'editar_producto.html', {'form': form, 'producto_id': producto.id})
 
 
-
+def buscar_producto(request):
+    if request.method=='GET':
+        query = request.GET.get('query')   #obteniendo lo que trae el get
+        productos = Producto.objects.filter(Q(nombre__icontains=query) | Q(fabrica__icontains=query))
+        return render(request,'buscar.html',{'productos': productos })
 
 
 
