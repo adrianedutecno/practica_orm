@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from django.contrib.auth import logout
 from .models import Producto, Fabrica
 
 
@@ -9,6 +9,7 @@ class ProductoAdmin(admin.ModelAdmin):
 
 class FabricaAdmin(admin.ModelAdmin):
     list_display = ('id', 'nombre')
+
 
 
 # Register your models here.

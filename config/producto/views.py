@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
@@ -13,7 +14,6 @@ from .models import Producto
 def listar_productos(request):
     productos = Producto.objects.all()
     return render(request, 'listar_productos.html', {'productos': productos})
-
 
 # views o controlador para crear productos
 def crear_producto(request):
@@ -48,7 +48,10 @@ def editar_producto(request, producto_id):
     return render(request, 'editar_producto.html', {'form': form, 'producto_id': producto.id})
 
 
-
+# views o controlador para cerrar_sesion
+    def cerrar_sesion(request):
+        logout(request)
+        return render(request, 'login.html')
 
 
 
