@@ -1,4 +1,11 @@
 from django.contrib import messages
+<<<<<<< HEAD
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
+=======
+from django.contrib.auth import authenticate, login
+>>>>>>> develop
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
@@ -50,5 +57,46 @@ def editar_producto(request, producto_id):
 
 
 
+def registro(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Registrado exitosamente')
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registro.html', {'form': form})
 
+
+def iniciar_sesion(request):
+    if request.method == 'POST':  # si el request es de tipo post
+        username = request.POST['username']  # captura username del request
+        password = request.POST['password']  # captura password del request
+        user = authenticate(request, username=username, password=password)  # se captura el usuario encontrado
+        if user is not None:  # si el usuario autenticado no viene vacio, quiere decir es validas sus credenciales
+            login(request, user)
+            return redirect('listar_productos')
+        else:
+            messages.error(request, 'Usuario o password inválidas')
+            return render(request, 'login.html')
+    return render(request, 'login.html')  # tipo get
+
+
+# View para eliminar productos
+def eliminar(request, producto_id):
+    if request.method == 'POST':
+        producto = get_object_or_404(Producto, id=producto_id)
+        producto.delete()
+        messages.success(request, 'Producto eliminado exitosamente.')
+        return redirect('listar_productos')
+    else:
+        return redirect('listar_productos')
+
+
+
+# View para confirmar eliminación de producto
+def eliminar_confirmacion(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    return render(request, 'confirmar.html', {'producto': producto})
 
