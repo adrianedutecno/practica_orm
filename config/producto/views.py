@@ -57,7 +57,6 @@ def editar_producto(request, producto_id):
     return render(request, 'editar_producto.html', {'form': form, 'producto_id': producto.id})
 
 
-
 # views o controlador para cerrar_sesion
 def cerrar_sesion(request):
     logout(request)
