@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 class Fabrica(models.Model):
     nombre = models.CharField(max_length=255)
+    pais = models.CharField(max_length=50, blank=True, null=True)
 
     # producto = models.ManyToManyField(Producto)
     def __str__(self):
