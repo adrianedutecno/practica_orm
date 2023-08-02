@@ -13,7 +13,8 @@ urlpatterns = [
     path('confirmar/<int:producto_id>/', eliminar, name='eliminar'),
     path('logout/', cerrar_sesion, name='logout'),
     path('login/', iniciar_sesion, name='login'),
-    path('registrar/', registro, name='registrar'),
+    path('registro/', registro, name='registro'),
     path('buscar/', buscar, name='buscar'),
 
 ]
+
