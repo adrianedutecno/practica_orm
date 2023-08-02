@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 from django.contrib.auth.forms import UserCreationForm
@@ -57,6 +58,7 @@ def editar_producto(request, producto_id):
     return render(request, 'editar_producto.html', {'form': form, 'producto_id': producto.id})
 
 
+
 # views o controlador para cerrar_sesion
 def cerrar_sesion(request):
     logout(request)
@@ -111,3 +113,4 @@ def eliminar(request, producto_id):
 def eliminar_confirmacion(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     return render(request, 'confirmar.html', {'producto': producto})
+

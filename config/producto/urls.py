@@ -17,3 +17,4 @@ urlpatterns = [
     path('buscar/', buscar, name='buscar'),
 
 ]
+
