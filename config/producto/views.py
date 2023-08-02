@@ -111,5 +111,3 @@ def eliminar(request, producto_id):
 def eliminar_confirmacion(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     return render(request, 'confirmar.html', {'producto': producto})
-
-# cambio agregado
