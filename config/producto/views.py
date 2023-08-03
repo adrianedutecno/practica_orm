@@ -21,7 +21,7 @@ from .models import Producto
 
 # views o controlador para listar
 def listar_productos(request):
-    productos = Producto.objects.all()
+    productos = Producto.objects.using('default').all()
     return render(request, 'listar_productos.html', {'productos': productos})
 
 
@@ -30,7 +30,8 @@ def crear_producto(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST)  # se captura el formulario
         if form.is_valid():  # se valida el formulario
-            form.save()  # se guarda el formulario si es valido
+            producto = form.save(commit=False)  # se guarda el formulario si es valido
+            producto.save(using='default')  # using='local' permite guardar en una base de datos especifica
             messages.success(request, 'Producto agregado correctamente')
             return redirect('listar_productos')
         else:
