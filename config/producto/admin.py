@@ -30,6 +30,6 @@ class FabricaAdmin(admin.ModelAdmin):
 admin.site.register(Producto, ProductoAdmin)
 admin.site.register(Fabrica, FabricaAdmin)
 
-admin.site.site_header = 'Catalogo de Productos'
-admin.site.index_title = 'Panel de control'
-admin.site.site_title = 'Panel de Control'
+# admin.site.site_header = 'Catalogo de Productos'
+# admin.site.index_title = 'Panel de control'
+# admin.site.site_title = 'Panel de Control'

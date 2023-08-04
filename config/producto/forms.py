@@ -27,6 +27,7 @@ class ProductoForm(forms.ModelForm):
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(
         label='Email',
+        widget=forms.EmailInput(attrs={'class': 'form-control w-100'}),
         help_text='Enter a valid email address. Only letters, digits and @/./+/-/_ characters are allowed.',
         required=True)  # Add email field
 
