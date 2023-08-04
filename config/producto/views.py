@@ -13,7 +13,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from .forms import ProductoForm
+from .forms import ProductoForm, CustomUserCreationForm
 from .models import Producto
 
 
@@ -74,13 +74,13 @@ def buscar(request):
 
 def registro(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Registrado exitosamente')
             return redirect('login')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'registro.html', {'form': form})
 
 
