@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'producto.apps.ProductoConfig',
-    # 'producto'
+    # 'producto.apps.ProductoConfig',
+    'producto',
     'bootstrap5',  # bootstrap 5
     'crispy_forms',  # crispy forms para renderizar formularios de una mejor manera
     'crispy_bootstrap5',

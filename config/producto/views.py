@@ -68,7 +68,7 @@ def cerrar_sesion(request):
 def buscar(request):
     if request.method == 'GET':
         query = request.GET.get('query')  # obteniendo lo que trae el get
-        productos = Producto.objects.filter(Q(nombre__icontains=query) | Q(fabrica__icontains=query))
+        productos = Producto.objects.filter(Q(nombre__icontains=query) | Q(descripcion__icontains=query))
         return render(request, 'buscar.html', {'productos': productos})
 
 
