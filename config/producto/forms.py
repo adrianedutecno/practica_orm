@@ -11,7 +11,7 @@ class ProductoForm(forms.ModelForm):
             'nombre': 'Nombre',  # el atributo del objeto es el key y el value es el label
             'precio': 'Precio',
             'descripcion': 'Descripción',
-            'fecha_vencimiento' : 'Fecha de Vencimiento',
+            'fecha_vencimiento': 'Fecha de Vencimiento',
             'fabrica': 'Fábrica'
         }
         widgets = {  # caracteristicas de los campos a mostrar en el formulario
