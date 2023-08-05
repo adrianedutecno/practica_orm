@@ -1,9 +1,12 @@
 from django.contrib import admin
 from django.contrib.auth import logout
+
+from .forms import ProductoForm
 from .models import Producto, Fabrica
 
 
 class ProductoAdmin(admin.ModelAdmin):
+    # form = ProductoForm
     list_display = ('id', 'nombre', 'precio', 'costo', 'descripcion', 'fecha_vencimiento', 'fabrica')
     list_filter = ('nombre', 'fabrica')
     list_display_links = ['id', 'nombre']
@@ -30,6 +33,6 @@ class FabricaAdmin(admin.ModelAdmin):
 admin.site.register(Producto, ProductoAdmin)
 admin.site.register(Fabrica, FabricaAdmin)
 
-admin.site.site_header = 'Catalogo de Productos'
-admin.site.index_title = 'Panel de control'
-admin.site.site_title = 'Panel de Control'
+# admin.site.site_header = 'Catalogo de Productos'
+# admin.site.index_title = 'Panel de control'
+# admin.site.site_title = 'Panel de Control'
