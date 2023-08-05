@@ -20,7 +20,7 @@ def crear_producto(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST)  # se captura el formulario
         if form.is_valid():  # se valida el formulario
-            form.save()  # se guarda el formulario si es valido
+            form.save()  # se guarda el formulario si es válido
             messages.success(request, 'Producto agregado correctamente')
             return redirect('listar_productos')
         else:
