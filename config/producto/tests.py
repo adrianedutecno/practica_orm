@@ -6,6 +6,11 @@ from .models import Fabrica, Producto
 
 class TemplateTest(TestCase):
 
+    # For execute
+    # python manage.py test
+    # python manage.py test producto
+    # python manage.py test producto.tests.TemplateTest.test_listar_productos
+
     def setUp(self):
         # Setup run before every test method
         # fabrica
@@ -95,3 +100,68 @@ class TemplateTest(TestCase):
         self.assertContains(response, '<section class="container mt-5">')
         self.assertContains(response, '<th scope="col">Id</th>')
         self.assertContains(response, 'Producto')
+
+
+class ViewsTest(TestCase):
+
+    def setUp(self):
+        # fabrica
+        self.fabrica = Fabrica.objects.create(nombre='Fabrica')
+        # producto
+        self.producto = Producto.objects.create(nombre='Producto',
+                                                precio=1500,
+                                                descripcion='Descripcion',
+                                                fecha_vencimiento='2023-08-05',
+                                                fabrica_id=self.fabrica.id)
+
+    def test_listar_productos(self):
+        response = self.client.get(reverse('listar_productos'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Producto')
+
+    def test_crear_producto(self):
+        response = self.client.post(reverse('crear_producto'), {
+            'nombre': 'Producto test crear producto',
+            'precio': 1500,
+            'descripcion': 'Descripcion',
+            'fecha_vencimiento': '2023-08-07',
+            'fabrica_id': self.fabrica.id
+        })
+        print('RESPONSE:', response)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Producto.objects.count(), 2)
+        self.assertIsNotNone(response)
+
+    def test_editar_producto(self):
+        response = self.client.post(reverse('editar_producto', args=[self.producto.id]), {
+            'nombre': 'Producto editado',
+            'precio': 1500,
+            'descripcion': 'Descripcion',
+            'fecha_vencimiento': '2023-08-07',
+            'fabrica_id': self.fabrica.id
+        })
+        self.producto.refresh_from_db()
+        print('PRODUCTO nombre:', self.producto.nombre)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.producto.nombre, 'Producto editado')
+
+    def test_eliminar(self):
+        producto = Producto.objects.create(nombre='Producto',
+                                           precio=1500,
+                                           descripcion='Descripcion',
+                                           fecha_vencimiento='2023-08-05',
+                                           fabrica_id=self.fabrica.id)
+        response = self.client.post(reverse('eliminar', args=[producto.id]))
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Producto.objects.count(), 1)
+        self.assertNotEquals(Producto.objects.count(), 2)
+
+    def test_model_content_fabrica(self):
+        self.assertEqual(self.fabrica.nombre, 'Fabrica')
+        self.assertNotEqual(self.fabrica.pais, 'Chile')
+
+    def test_model_content_producto(self):
+        self.assertEqual(self.producto.fecha_vencimiento, '2023-08-05')
+        self.assertEqual(self.producto.nombre, 'Producto')
+        self.assertEqual(self.producto.fabrica.nombre, 'Fabrica')
